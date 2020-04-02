@@ -8,7 +8,7 @@ from utils.format import (format_amount_in_weis, format_date_time,
                           format_integer, parse_date_from_epoch)
 from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
-from utils.misc import to_date_from_epoch, to_etherscan_link
+from utils.misc import to_date_from_epoch, to_etherscan_link, get_csv_writer
 
 TOKEN_FIELDS_BASIC = 'id, name, symbol, address, decimals'
 
@@ -106,6 +106,21 @@ def print_tokens_pretty(tokens):
       click.style(SEPARATOR, fg=COLOR_SEPARATOR)
     )
 
+
 def print_tokens_csv(tokens):
-  # TODO: Implement here the CSV formatting
-  click.echo("Not implemented yet")
+
+  writer = get_csv_writer()
+
+  writer.writerow(['ID', 'Symbol', 'Name', 'Decimals', 'Registered', 'Transaction'])
+
+  for token in tokens:
+    symbol = token.get('symbol', '')
+    name = token.get('name', '')
+
+    writer.writerow([token['id'],
+      symbol,
+      name,
+      token['decimals'],
+      token['address'],
+      format_date_time(token['create_date']),
+      to_etherscan_link(token['tx_hash'])])

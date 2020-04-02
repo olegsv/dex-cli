@@ -23,3 +23,7 @@ COLOR_LABEL = 'green'
 COLOR_LABEL_DELETED = 'red'
 COLOR_SEPARATOR = 'blue'
 COLOR_SECONDARY = 'cyan'
+
+# CSV Output
+CSV_DELIMITER = "\t"
+CSV_QUOTE = '"'
