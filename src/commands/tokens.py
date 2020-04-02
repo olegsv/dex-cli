@@ -114,12 +114,9 @@ def print_tokens_csv(tokens):
   writer.writerow(['ID', 'Symbol', 'Name', 'Decimals', 'Registered', 'Transaction'])
 
   for token in tokens:
-    symbol = token.get('symbol', '')
-    name = token.get('name', '')
-
     writer.writerow([token['id'],
-      symbol,
-      name,
+      token.get('symbol', ''),
+      token.get('name', ''),
       token['decimals'],
       token['address'],
       format_date_time(token['create_date']),
