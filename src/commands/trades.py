@@ -180,8 +180,6 @@ def print_trades_csv(trades):
 
     sell_token, sell_volume = trade['sell_token'], trade['sell_volume']
     buy_token, buy_volume = trade['buy_token'], trade['buy_volume']
-    sellTokenLabel = format_token_short(sell_token)
-    buyTokenLabel = format_token_short(buy_token)
 
     price_sell_buy = format_price(
       calculate_price(
@@ -193,10 +191,10 @@ def print_trades_csv(trades):
 
     price_buy_sell = format_price(
       calculate_price(
-        numerator = sell_volume,
-        denominator = buy_volume,
+        numerator=sell_volume,
+        denominator=buy_volume,
         decimals_numerator=sell_token['decimals'],
-        decimals_denominator = buy_token['decimals'],
+        decimals_denominator=buy_token['decimals'],
       ))
 
 
