@@ -29,6 +29,5 @@ CSV_DELIMITER = ','
 CSV_QUOTE = '"'
 
 # Date and time
-DATE_TIME_FORMAT_ISO_8601 = "%y-%m-%dT%H:%M:%SZ"
 DATE_TIME_FORMAT = "%d/%m/%y %H:%M:%S"
 DATE_FORMAT = "%d/%m/%y"

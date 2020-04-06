@@ -7,7 +7,7 @@ from gql import gql
 from constants import (COLOR_LABEL, COLOR_LABEL_DELETED, COLOR_SEPARATOR,
                        SEPARATOR)
 from utils.format import (format_amount, format_amount_in_weis,
-                          format_batch_id_with_date, format_date_time,
+                          format_batch_id_with_date, format_date_time, format_date_time_iso8601,
                           format_integer, format_percentage, format_price,
                           format_token_long, format_token_short,
                           parse_date_from_epoch)
@@ -176,7 +176,7 @@ def print_trades_csv(trades):
   for trade in trades:
 
     revert_date = trade.get('revert_date', None)
-    revert_date_text = format_date_time(revert_date) if revert_date else ''
+    revert_date_text = format_date_time_iso8601(revert_date) if revert_date else ''
 
     sell_token, sell_volume = trade['sell_token'], trade['sell_volume']
     buy_token, buy_volume = trade['buy_token'], trade['buy_volume']
@@ -197,8 +197,7 @@ def print_trades_csv(trades):
         decimals_denominator=buy_token['decimals'],
       ))
 
-
-    writer.writerow([format_date_time(trade['trade_date']),
+    writer.writerow([format_date_time_iso8601(trade['trade_date']),
         revert_date_text,
         trade['trade_batch_id'],
         trade['owner_address'],

@@ -4,7 +4,7 @@ import click
 from gql import gql
 
 from constants import COLOR_LABEL, COLOR_SEPARATOR, OWL_DECIMALS, SEPARATOR
-from utils.format import (format_amount_in_weis, format_date_time,
+from utils.format import (format_amount_in_weis, format_date_time, format_date_time_iso8601,
                           format_integer, parse_date_from_epoch)
 from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
@@ -119,5 +119,5 @@ def print_tokens_csv(tokens):
       token.get('name', ''),
       token['decimals'],
       token['address'],
-      format_date_time(token['create_date']),
+      format_date_time_iso8601(token['create_date']),
       to_etherscan_link(token['tx_hash'])])

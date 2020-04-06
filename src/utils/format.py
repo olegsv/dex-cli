@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import ROUND_DOWN, Context, Decimal
 
-from constants import BATCH_TIME_SECONDS, MAX_BATCH_ID, DATE_FORMAT, DATE_TIME_FORMAT, DATE_TIME_FORMAT_ISO_8601
+from constants import BATCH_TIME_SECONDS, MAX_BATCH_ID, DATE_FORMAT, DATE_TIME_FORMAT
 from utils.misc import (is_unlimited_amount, to_date_from_batch_id,
                         to_date_from_epoch)
 
@@ -57,7 +57,11 @@ def format_date(date):
 
 
 def format_date_time(date, tooBigLabel='Never'):
-    return tooBigLabel if date == datetime.max else date.strftime(DATE_TIME_FORMAT_ISO_8601)
+    return tooBigLabel if date == datetime.max else date.strftime(DATE_TIME_FORMAT)
+
+
+def format_date_time_iso8601(date, tooBigLabel='Never'):
+  return tooBigLabel if date == datetime.max else datetime.isoformat(date)
 
 
 def format_batch_id_with_date(batch_id, tooBigLabel='Never expires'):
