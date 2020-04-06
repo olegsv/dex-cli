@@ -1,5 +1,3 @@
-.history
-ENV
-.vscode
-__pycache__
-.coverage
+venv
+.idea
+*.csv

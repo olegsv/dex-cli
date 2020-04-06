@@ -8,8 +8,8 @@ from commands.trades import get_trades
 import click
 
 
-def hide_header(ctx, param, value):
-    """Hide header if requested format requires that"""
+def show_header(ctx, param, value):
+    """Display header if requested format allows that"""
     if value == 'pretty':
 
         click.echo('\n' + click.style('''\
