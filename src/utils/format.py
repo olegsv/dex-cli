@@ -51,6 +51,8 @@ def format_amount(amount, decimals=18, rounding=ROUND_DOWN):
 
   return f'{rounded_value:,.{decimals}f}'.rstrip('0').rstrip('.')
 
+def unformat_amount(formatted_amount: str) -> float:
+  return float(formatted_amount.replace(',', ''))
 
 def format_date(date):
   return '' if date is None else date.strftime(DATE_FORMAT)
@@ -61,6 +63,8 @@ def format_date_time(date, tooBigLabel='Never'):
 
 
 def format_date_time_iso8601(date, tooBigLabel='Never'):
+  if not date:
+    return ''
   return tooBigLabel if date == datetime.max else datetime.isoformat(date)
 
 
