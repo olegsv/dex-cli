@@ -12,8 +12,7 @@ from utils.format import (format_amount, format_amount_in_weis,
                           format_integer, format_percentage, format_price,
                           format_token_long, format_token_short,
                           parse_date_from_epoch,
-                          format_date_time_iso8601,
-                          unformat_amount)
+                          format_date_time_iso8601,)
 from utils.graphql import (debug_query, get_graphql_client, gql_filter,
                            gql_sort_by)
 from utils.misc import (calculate_price, is_unlimited_amount,
@@ -257,42 +256,42 @@ def print_orders_csv(orders):
 
   for order in orders:
 
-    price_sell_buy = unformat_amount(format_price(
+    price_sell_buy = format_amount(
       calculate_price(
           numerator=order['price_numerator'],
           denominator=order['price_denominator'],
           decimals_numerator=order['buy_token']['decimals'],
           decimals_denominator=order['sell_token']['decimals'],
-      )))
+      ), thousands_separator=False)
 
-    price_buy_sell = unformat_amount(format_price(
+    price_buy_sell = format_amount(
       calculate_price(
         numerator=order['price_denominator'],
         denominator=order['price_numerator'],
         decimals_numerator=order['sell_token']['decimals'],
         decimals_denominator=order['buy_token']['decimals'],
-      )))
+      ), thousands_separator=False)
 
-    avg_sell_buy = unformat_amount(format_price(
+    avg_sell_buy = format_amount(
       calculate_price(
           numerator=order['bought_volume'],
           denominator=order['sold_volume'],
           decimals_numerator=order['buy_token']['decimals'],
           decimals_denominator=order['sell_token']['decimals'],
-      )))
+      ), thousands_separator=False)
 
-    avg_buy_sell = unformat_amount(format_price(
+    avg_buy_sell = format_amount(
       calculate_price(
         numerator=order['sold_volume'],
         denominator=order['bought_volume'],
         decimals_numerator=order['sell_token']['decimals'],
         decimals_denominator=order['buy_token']['decimals'],
-      )))
+      ), thousands_separator=False)
 
     pair_sell_buy = format_token_short(order['sell_token']) + '/' + format_token_short(order['buy_token'])
     pair_buy_sell = format_token_short(order['buy_token']) + '/' + format_token_short(order['sell_token'])
 
-    max_sell_amount = unformat_amount(format_amount_in_weis(order['max_sell_amount'], order['sell_token']['decimals'])),
+    max_sell_amount = format_amount_in_weis(order['max_sell_amount'], order['sell_token']['decimals'], thousands_separator=False)
 
     writer.writerow([
       order['order_id'],
@@ -308,10 +307,10 @@ def print_orders_csv(orders):
       price_buy_sell,
       avg_buy_sell,
       format_token_short(order['sell_token']),
-      unformat_amount(format_amount_in_weis(order['sold_volume'], order['sell_token']['decimals'])),
+      format_amount_in_weis(order['sold_volume'], order['sell_token']['decimals'], thousands_separator=False),
       max_sell_amount,
       format_token_short(order['buy_token']),
-      unformat_amount(format_amount_in_weis(order['bought_volume'], order['buy_token']['decimals'])),
+      format_amount_in_weis(order['bought_volume'], order['buy_token']['decimals'], thousands_separator=False),
       format_date_time_iso8601(order['create_date']),
       to_etherscan_link(order['tx_hash']),
       order['owner_address'],
